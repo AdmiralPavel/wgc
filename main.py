@@ -41,7 +41,7 @@ class game:
                or self.goat.position == self.cabbage.position and self.position != self.goat.position
 
     def is_win(self):
-        return self.wolf.position == 'end' and self.goat.position == 'end' and self.cabbage == 'end'
+        return self.wolf.position == 'end' and self.goat.position == 'end' and self.cabbage.position == 'end'
 
     def change_position(self):
         if self.position == 'start':
@@ -54,7 +54,8 @@ class game:
 
 print('Игра "Волк, коза и капуста".')
 my_game = game()
-while not game.is_win(game) and not game.is_failed(game):
+while not my_game.is_win() and not my_game.is_failed():
+    my_game.print_condition()
     while True:
         item1 = input(
             'Введите предмет, который вы хотите положить/достать из лодки. (W, G, C) или S чтобы переправить лодку на '
@@ -80,4 +81,7 @@ while not game.is_win(game) and not game.is_failed(game):
             my_game.remove_from_boat(my_game.cabbage, my_game.position)
     else:
         my_game.change_position()
-    my_game.print_condition()
+if my_game.is_win():
+    print("Поздравляем! Вы справились с данной головоломкой")
+else:
+    print("К сожалению, вы не справились с задачей!")
